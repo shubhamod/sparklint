@@ -30,7 +30,15 @@ class SparkListenerTest extends SparkListener {
     println("Job End ID: " + jobEnd.jobId)
     println("Job End Result: " + jobEnd.jobResult)
     println("Job End time: " + jobEnd.time)
+  }
 
+  override def onStageSubmitted(stageSubmitted: SparkListenerStageSubmitted): Unit = {
+    println("Stage Start properties: " + stageSubmitted.properties)
+    println("Stage Start INFO: " + stageSubmitted.stageInfo)
+  }
+
+  override def onStageCompleted(stageCompleted: SparkListenerStageCompleted): Unit = {
+    println("Stage Completed INFO: " + stageCompleted.stageInfo)
   }
 
 }
