@@ -43,22 +43,24 @@ class SparkListenerTest extends SparkListener {
 
   override def onTaskStart(taskStart: SparkListenerTaskStart): Unit = {
     println("Task StageID INFO: " + taskStart.stageId)
-    println("Task INFO: " + taskStart.taskInfo)
+    println("Task INFO: " + taskStart.taskInfo.launchTime)
     println("Task StageAttemptID INFO: " + taskStart.stageAttemptId)
   }
 
   override def onTaskEnd(taskEnd: SparkListenerTaskEnd): Unit = {
     println("Task StageID INFO: " + taskEnd.stageId)
-    println("Task INFO: " + taskEnd.taskInfo)
+    println("Task INFO: " + taskEnd.taskInfo.finishTime)
+    println("Task INFO: " + taskEnd.taskInfo.duration)
     println("Task StageAttemptID INFO: " + taskEnd.stageAttemptId)
     println("Task Reason INFO: " + taskEnd.reason)
     println("Task TaskType INFO: " + taskEnd.taskType)
-    println("Task InputMetrics INFO: " + taskEnd.taskMetrics.inputMetrics)
-    println("Task outputMetrics INFO: " + taskEnd.taskMetrics.outputMetrics)
+    println("Task InputMetrics INFO: " + taskEnd.taskMetrics.inputMetrics.bytesRead +  "  " +  taskEnd.taskMetrics.inputMetrics.recordsRead)
+    println("Task outputMetrics INFO: " + taskEnd.taskMetrics.outputMetrics.bytesWritten + "  " + taskEnd.taskMetrics.outputMetrics.recordsWritten)
+
   }
 
   override def onTaskGettingResult(taskGettingResult: SparkListenerTaskGettingResult): Unit = {
-    println("OnTaskGettingResult  INFO" + taskGettingResult.taskInfo)
+    println("OnTaskGettingResult INFO" + taskGettingResult.taskInfo)
   }
 
 }
