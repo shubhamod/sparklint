@@ -41,4 +41,24 @@ class SparkListenerTest extends SparkListener {
     println("Stage Completed INFO: " + stageCompleted.stageInfo)
   }
 
+  override def onTaskStart(taskStart: SparkListenerTaskStart): Unit = {
+    println("Task StageID INFO: " + taskStart.stageId)
+    println("Task INFO: " + taskStart.taskInfo)
+    println("Task StageAttemptID INFO: " + taskStart.stageAttemptId)
+  }
+
+  override def onTaskEnd(taskEnd: SparkListenerTaskEnd): Unit = {
+    println("Task StageID INFO: " + taskEnd.stageId)
+    println("Task INFO: " + taskEnd.taskInfo)
+    println("Task StageAttemptID INFO: " + taskEnd.stageAttemptId)
+    println("Task Reason INFO: " + taskEnd.reason)
+    println("Task TaskType INFO: " + taskEnd.taskType)
+    println("Task InputMetrics INFO: " + taskEnd.taskMetrics.inputMetrics)
+    println("Task outputMetrics INFO: " + taskEnd.taskMetrics.outputMetrics)
+  }
+
+  override def onTaskGettingResult(taskGettingResult: SparkListenerTaskGettingResult): Unit = {
+    println("OnTaskGettingResult  INFO" + taskGettingResult.taskInfo)
+  }
+
 }
